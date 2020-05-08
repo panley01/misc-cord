@@ -1,100 +1,120 @@
-staff = 1
-partner = 1<<1
-hypesquad = 1<<2
-bug_hunter = 1<<3
-unknown_4 = 1<<4
-unknown_5 = 1<<5
-hypesquad_bravery = 1<<6
-hypesquad_brilliance = 1<<7
-hypesquad_balance = 1<<8
-early_supporter = 1<<9
-team_user = 1<<10
-unknown_11 = 1<<11
-system = 1<<12
-unknown_13 = 1<<13
-bug_hunter_2 = 1<<14
-unknown_15 = 1<<15
-verified_bot = 1<<16
-verified_developer = 1<<17
-class flags():
+"""Utilities for working with user flags."""
+
+from typing import Any, Dict, List, Union
+
+STAFF = 1
+PARTNER = 1 << 1
+HYPESQUAD_EVENTS = 1 << 2
+BUG_HUNTER = 1 << 3
+UNKNOWN_4 = 1 << 4
+UNKNOWN_5 = 1 << 5
+HYPESQUAD_BRAVERY = 1 << 6
+HYPESQUAD_BRILLIANCE = 1 << 7
+HYPESQUAD_BALANCE = 1 << 8
+EARLY_SUPPORTER = 1 << 9
+TEAM_USER = 1 << 10
+UNKNOWN_11 = 1 << 11
+SYSTEM = 1 << 12
+UNKNOWN_13 = 1 << 13
+BUG_HUNTER_2 = 1 << 14
+UNKNOWN_15 = 1 << 15
+VERIFIED_BOT = 1 << 16
+VERIFIED_DEVELOPER = 1 << 17
+
+
+class Flags:
     """
-    Represents the flags returned from the various methods to return flags, or a supported list of flags.
+    Flags from a Discord user.
+
+    Represents the flags returned from the Discord API in integer form
+    as a class with attributes representing each flag.
 
     Attributes
     -----------
     list: :class:`list`
         A python list object of all flags the user has.
+
     """
-    def __init__(self,flags):
+
+    def __init__(self, flags: List[str]) -> None:
+        """Create a new Flags instance."""
+        if not isinstance(flags, list):
+            raise ValueError("Flags must be passed a list of user flags.")
+
         self.list = flags
-    def staff(self):
-        if "Staff" in self.list:
-            return True
-        else:
-            return False
-    def partner(self):
-        if "Partner" in self.list:
-            return True
-        else:
-            return False
-    def hs_events(self):
-        if "Hypesquad Events" in self.list:
-            return True
-        else:
-            return False
-    def bug_hunter(self):
-        if "Bug hunter" in self.list:
-            return True
-        else:
-            return False
-    def hs_bravery(self):
-        if "Hypesquad bravery" in self.list:
-            return True
-        else:
-            return False
-    def hs_brilliance(self):
-        if "Hypesquad brilliance" in self.list:
-            return True
-        else:
-            return False
-    def hs_balance(self):
-        if "Hypesquad balance" in self.list:
-            return True
-        else:
-            return False
-    def early_nitro(self):
-        if "Early nitro" in self.list:
-            return True
-        else:
-            return False
-    def team_user(self):
-        if "Team user" in self.list:
-            return True
-        else:
-            return False
-    def system(self):
-        if "System" in self.list:
-            return True
-        else:
-            return False
-    def bug_hunter_2(self):
-        if "Bug hunter lvl2" in self.list:
-            return True
-        else:
-            return False
-    def verified_bot(self):
-        if "Verified Bot" in self.list:
-            return True
-        else:
-            return False
-    def verified_developer(self):
-        if "Verified Developer" in self.list:
-            return True
-        else:
-            return False
-def flagsfromint(flags):
+
+    @property
+    def staff(self) -> bool:
+        """Discord staff."""
+        return "Staff" in self.list
+
+    @property
+    def partner(self) -> bool:
+        """Discord Partner."""
+        return "Partner" in self.list
+
+    @property
+    def hs_events(self) -> bool:
+        """Hypesquad events."""
+        return "Hypesquad Events" in self.list
+
+    @property
+    def bug_hunter(self) -> bool:
+        """Bug Hunter (Level 1)."""
+        return "Bug hunter" in self.list
+
+    @property
+    def hs_bravery(self) -> bool:
+        """Hypesquad Bravery."""
+        return "Hypesquad bravery" in self.list
+
+    @property
+    def hs_brilliance(self) -> bool:
+        """Hypesquad Brilliance."""
+        return "Hypesquad brilliance" in self.list
+
+    @property
+    def hs_balance(self) -> bool:
+        """Hypesquad Balance."""
+        return "Hypesquad balance" in self.list
+
+    @property
+    def early_nitro(self) -> bool:
+        """Early supporter."""
+        return "Early nitro" in self.list
+
+    @property
+    def team_user(self) -> bool:
+        """Team user."""
+        return "Team user" in self.list
+
+    @property
+    def system(self) -> bool:
+        """System user."""
+        return "System" in self.list
+
+    @property
+    def bug_hunter_2(self) -> bool:
+        """Bug Hunter (Level 2)."""
+        return "Bug hunter lvl2" in self.list
+
+    @property
+    def verified_bot(self) -> bool:
+        """Verified Bot."""  # noqa: D401
+        return "Verified Bot" in self.list
+
+    @property
+    def verified_developer(self) -> bool:
+        """Verified Developer."""  # noqa: D401
+        return "Verified Developer" in self.list
+
+
+def flags_from_int(flags: Union[str, int]) -> List[str]:
     """
-    Iterates over all known Discord flag bitwise values with an integer flag value
+    Convert a Discord flags integer into the relevant user flags.
+
+    :param flags: The flags or public_flags value from the Discord API.
+    :rtype: list[str]
     """
     if (isinstance(flags, int)):
         pass
@@ -102,67 +122,103 @@ def flagsfromint(flags):
         flags = int(flags)
     else:
         return False
-    flaglist=[]
-    if (flags & staff) == staff:
+
+    flaglist = []
+
+    if (flags & STAFF) == STAFF:
         flaglist.append("Staff")
-    if (flags & partner) == partner:
+
+    if (flags & PARTNER) == PARTNER:
         flaglist.append("Partner")
-    if (flags & hypesquad) == hypesquad:
+
+    if (flags & HYPESQUAD_EVENTS) == HYPESQUAD_EVENTS:
         flaglist.append("Hypesquad Events")
-    if (flags & bug_hunter) == bug_hunter:
+
+    if (flags & BUG_HUNTER) == BUG_HUNTER:
         flaglist.append("Bug hunter")
-    if (flags & unknown_4) == unknown_4:
+
+    if (flags & UNKNOWN_4) == UNKNOWN_4:
         flaglist.append("MFA_SMS")
-    if (flags & unknown_5) == unknown_5:
+
+    if (flags & UNKNOWN_5) == UNKNOWN_5:
         flaglist.append("PREMIUM_PROMO_DISMISSED")
-    if (flags & hypesquad_bravery) == hypesquad_bravery:
+
+    if (flags & HYPESQUAD_BRAVERY) == HYPESQUAD_BRAVERY:
         flaglist.append("Hypesquad bravery")
-    if (flags & hypesquad_brilliance) == hypesquad_brilliance:
+
+    if (flags & HYPESQUAD_BRILLIANCE) == HYPESQUAD_BRILLIANCE:
         flaglist.append("Hypesquad brilliance")
-    if (flags & hypesquad_balance) == hypesquad_balance:
+
+    if (flags & HYPESQUAD_BALANCE) == HYPESQUAD_BALANCE:
         flaglist.append("Hypesquad balance")
-    if (flags & early_supporter) == early_supporter:
+
+    if (flags & EARLY_SUPPORTER) == EARLY_SUPPORTER:
         flaglist.append("Early nitro")
-    if (flags & team_user) == team_user:
+
+    if (flags & TEAM_USER) == TEAM_USER:
         flaglist.append("Team user")
-    if (flags & unknown_11) == unknown_11:
+
+    if (flags & UNKNOWN_11) == UNKNOWN_11:
         flaglist.append("Unused")
-    if (flags & system) == system:
+
+    if (flags & SYSTEM) == SYSTEM:
         flaglist.append("System")
-    if (flags & unknown_13) == unknown_13:
-        flaglist.append("Unread urgent system message ")
-    if (flags & bug_hunter_2) == bug_hunter_2:
+
+    if (flags & UNKNOWN_13) == UNKNOWN_13:
+        flaglist.append("Unread urgent system message")
+
+    if (flags & BUG_HUNTER_2) == BUG_HUNTER_2:
         flaglist.append("Bug hunter lvl2")
-    if (flags & unknown_15) == unknown_15:
+
+    if (flags & UNKNOWN_15) == UNKNOWN_15:
         flaglist.append("UNDERAGE_DELETED")
-    if (flags & verified_bot) == verified_bot:
+
+    if (flags & VERIFIED_BOT) == VERIFIED_BOT:
         flaglist.append("Verified Bot")
-    if (flags & verified_developer) == verified_developer:
+
+    if (flags & VERIFIED_DEVELOPER) == VERIFIED_DEVELOPER:
         flaglist.append("Verified Developer")
+
     return flaglist
-def flagsfromjson(user_json):
+
+
+def flags_from_json(user_json: Dict[str, Any]) -> Flags:
     """
-    Gets the flag parameters returned from the Discord HTTP REST API and returns a misccord.flags object with the user's flags.
-    user_json = the JSON response from the Discord API.
+    Convert a Discord API user object to a Flags instance.
+
+    Takes in the JSON user from the Discord API response and
+    searches for flags and public_flags within this.
+
+    :param user_json: The JSON response from the Discord API.
+    :type user_json: dict
     """
     flags = []
+
     if "flags" in user_json:
-        flags += flagsfromint(user_json["flags"])
+        flags += flags_from_int(user_json["flags"])
+
     if "public_flags" in user_json:
-        flags += flagsfromint(user_json["public_flags"])
+        flags += flags_from_int(user_json["public_flags"])
+
     return flags(flags)
-async def flagsfromdpy(user):
+
+
+async def discord_py(user) -> Flags:  # noqa: ANN001
     """
-    Gets the flag parameters from a discord.py user object and returns a misccord.flags object with the user's flags.
-    user = the discord.py user object. This MUST be a user and not a member!
+    Fetch the flags from a Discord.py user object.
+
+    :param user: The user or member from discord.py
+    :rtype: Flags
     """
-    import asyncio, discord
-    user_json=await user._state.http.get_user(user.id)
-    return flagsfromjson(user_json)
-def flagsfromdisco(user):
+    user_json = await user._state.http.get_user(user.id)
+    return flags_from_json(user_json)
+
+
+def disco(user) -> Flags:  # noqa: ANN001
     """
-    Gets the flag parameters from a disco user object and returns a misccord.flags object with the user's flags.
-    user = the disco user object.
+    Fetch the flags from a Disco user object.
+
+    :param user: The user object from Disco
+    :rtype: Flags
     """
-    import disco
-    return flagsfromjson(user.to_dict())
+    return flags_from_json(user.to_dict())
