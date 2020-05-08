@@ -38,6 +38,9 @@ class Flags:
 
     def __init__(self, flags: List[str]) -> None:
         """Create a new Flags instance."""
+        if not isinstance(flags, list):
+            raise ValueError("Flags must be passed a list of user flags.")
+
         self.list = flags
 
     @property
