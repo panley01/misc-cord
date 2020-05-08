@@ -29,7 +29,7 @@ headers = {
   }
 r = requests.get("https://discordapp.com/api/v6/users/@me",headers=headers)
 r.raise_for_status()
-if (flags.flagsfromjson(r.json)).verified_bot():
+if (flags.flags_from_json(r.json)).verified_bot():
   print("Current bot user is a verified bot")
 else:
   print("Current bot user is NOT a verified bot")
@@ -41,7 +41,7 @@ from misccord import flags
 ctx = discord.Client()
 @ctx.event
 async def on_ready():
-  flags = flags.flagsfromdpy(ctx.ClientUser)
+  flags = flags.discord_py(ctx.ClientUser)
   for x in flags.list:
     print(x)
 ```
