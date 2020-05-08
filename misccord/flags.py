@@ -1,4 +1,3 @@
-from datetime import datetime
 staff = 1
 partner = 1<<1
 hypesquad = 1<<2
@@ -17,8 +16,6 @@ bug_hunter_2 = 1<<14
 unknown_15 = 1<<15
 verified_bot = 1<<16
 verified_developer = 1<<17
-UNIX_EPOCH = datetime(1970, 1, 1)
-DISCORD_EPOCH = 1420070400000
 class flags():
     """
     Represents the flags returned from the various methods to return flags, or a supported list of flags.
