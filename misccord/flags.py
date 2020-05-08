@@ -169,18 +169,3 @@ def flagsfromdisco(user):
     """
     import disco
     return flagsfromjson(user.to_dict())
-def sf_to_datetime(snowflake):
-    """
-    Converts a Discord snowflake to a UTC datetime.
-    """
-    return datetime.utcfromtimestamp(sf_to_unix(snowflake))
-def sf_to_unix(snowflake):
-    """
-    Converts a Discord snowflake to a UNIX_EPOCH time integer.
-    """
-    return sf_to_unix_ms(snowflake) / 1000
-def sf_to_unix_ms(snowflake):
-    """
-    Converts a Discord snowflake to a UNIX_EPOCH time integer in milliseconds.
-    """
-    return (int(snowflake) >> 22) + DISCORD_EPOCH
