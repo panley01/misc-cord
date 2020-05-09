@@ -138,7 +138,7 @@ class Permissions:
 
             return perms
 
-        # Flag bitwise checks
+        # Permission bitwise checks
 
         @property
         def stream(self) -> bool:
