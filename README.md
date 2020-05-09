@@ -6,7 +6,7 @@ PIP soontm
 
 ## Currently supports:
 - Extracting user objects from discord.py
-- Extracting user objects from disco
+- Extracting user objects from disco **_User flags are NOT in the Disco main branch yet_** use [This branch](https://github.com/elderlabs/disco/tree/rowboat) until they are.
 - Transforming user JSON into a flags class, containing a list of flags
 - Checking for individual flags via the flags class
 - Discord Snowflake to datetime timestamps and unix timestamps
