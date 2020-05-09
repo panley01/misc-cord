@@ -57,7 +57,7 @@ bot = MyBot()
 bot.run("token")
 ```
 
-Using misc-cord to add a command to your bot for fetching a users hypesquad house:
+Using misc-cord to add a command to your discord.py bot for fetching a users hypesquad house:
 ```python
 from discord.ext.commands import Bot, command
 from misccord import flags
@@ -75,4 +75,21 @@ async def hypesquad_house(ctx):
     await ctx.send(f"{mention}: You are in {hypesquad_house.title()}")
 
 bot.run("token")
+```
+
+Using misc-cord to add a command to your disco bot for listing all flags a user has:
+```python
+from disco.bot import Bot, Plugin
+from misccord import flags
+
+class SimplePlugin(Plugin):
+    @Plugin.command('my_flags')
+    def on_my_flags_commmand(self, event):
+        user_flags = flags.disco(event.msg.author)
+
+        output_msg = "__Your flags:__\n"
+        for enabled_flag in user_flags:
+            output_msg += enabled_flag.replace("_", " ").title() + "\n"
+
+        event.msg.reply(output_msg)
 ```
