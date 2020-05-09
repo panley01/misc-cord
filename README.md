@@ -10,7 +10,7 @@ PIP soontm
 - Transforming user JSON into a flags class, containing a list of flags
 - Checking for individual flags via the flags class
 - Discord Snowflake splicing to extract Datetime and Unix epoch timestamps
-- Discord Snowflake splicint to extract its worker ID, process ID and increment
+- Discord Snowflake splicing to extract its worker ID, process ID and increment
 ## Planned features
 - Permissions calculator/translator for easy permissions creation
 - Oauth permissions caluclator
