@@ -9,11 +9,11 @@ PIP soontm
 - Extracting user objects from disco **_public_flags has not been merged to disco yet, please use [this fork.](https://github.com/elderlabs/disco/tree/rowboat)_**
 - Transforming user JSON into a flags class, containing a list of flags
 - Checking for individual flags via the flags class
-- Discord Snowflake to datetime timestamps and unix timestamps
+- Discord Snowflake splicing to extract Datetime and Unix epoch timestamps
+- Discord Snowflake splicint to extract its worker ID, process ID and increment
 ## Planned features
 - Permissions calculator/translator for easy permissions creation
 - Oauth permissions caluclator
-- Snowflake Internal Worker ID, Internal Process ID and Increment parser
 - Markdown parsing/translation for messages
 - Tweetmoji/emoji code to unicode character conversion (and visa versa)
 
